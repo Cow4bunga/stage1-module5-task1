@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 
 public class InterfaceCreator {
 
-    public Predicate<List<String>> isValuesStartWithUpperCase(){
-        return list -> list.stream().allMatch(word -> Character.isUpperCase(word.charAt(0))
-                && Character.isLetter(word.charAt(0)));
+    public Predicate<List<String>> isValuesStartWithUpperCase() {
+        return list -> list.stream().allMatch(str -> Character.isUpperCase(str.charAt(0)));
     }
 
 
@@ -27,14 +26,14 @@ public class InterfaceCreator {
 
     public Supplier<List<String>> filterCollection(List<String> values) {
         return () -> values.stream().filter(str ->
-                Character.toUpperCase(str.charAt(0)) == str.charAt(0) &&
-                        str.endsWith(".") &&
-                        new StringTokenizer(str, " ").countTokens() > 3
-        ).collect(Collectors.toList());
+                        Character.toUpperCase(str.charAt(0)) == str.charAt(0) &&
+                                str.endsWith(".") &&
+                                new StringTokenizer(str, " ").countTokens() > 3).
+                collect(Collectors.toList());
     }
 
     public Function<List<String>, Map<String, Integer>> stringSize() {
-        return list ->{
+        return list -> {
             Map<String, Integer> map = new HashMap<>();
             for (String str : list)
                 map.put(str, str.length());
